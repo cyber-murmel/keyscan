@@ -7,7 +7,7 @@ from argparse import ArgumentParser
 from logging import debug, info, warning, error, critical, basicConfig as logConfig
 from logging import DEBUG, INFO, WARNING, ERROR, CRITICAL
 
-from keycodes import KEYCODE_CHAR_MAP
+from .keycodes import KEYCODE_CHAR_MAP
 
 class NoInputDeviceError(Exception):
     """No input device found. Check permissions and connections"""

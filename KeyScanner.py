@@ -59,12 +59,15 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
-    log_level=WARNING
+    log_format = "%(asctime)-15s %(levelname)-8s %(message)s"
     if 1 == args.verbose:
-        log_level=INFO
-    if 2 == args.verbose:
-        log_level=DEBUG
-    logConfig(level=log_level, format="%(asctime)-15s %(levelname)-8s %(message)s")
+        logConfig(level=INFO, format=log_format)
+        info("Log level set to INFO")
+    elif 2 == args.verbose:
+        logConfig(level=DEBUG, format=log_format)
+        debug("Log level set to debug")
+    else:
+        logConfig(level=WARNING, format=log_format)
     keyscanner = KeyScanner()
     try:
         info("Running Scanner")

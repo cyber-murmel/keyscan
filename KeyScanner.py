@@ -55,19 +55,20 @@ def parse_arguments():
     verbose = parser.add_mutually_exclusive_group()
     verbose.add_argument(   "-v",   "--verbose",    action="count",   help="set verbose loglevel")
     args = parser.parse_args()
+    # configure logging
+    log_format = "%(asctime)-15s %(levelname)-8s %(message)s"
+    if 1 == args.verbose:
+        logConfig(level=log_level, format=log_format)
+        info("Log level set to INFO")
+    elif 2 == args.verbose:
+        logConfig(level=DEBUG, format=log_format)
+        debug("Log level set to DEBUG")
+    else:
+        logConfig(level=WARNING, format=log_format)
     return args
 
 def main():
     args = parse_arguments()
-    log_format = "%(asctime)-15s %(levelname)-8s %(message)s"
-    if 1 == args.verbose:
-        logConfig(level=INFO, format=log_format)
-        info("Log level set to INFO")
-    elif 2 == args.verbose:
-        logConfig(level=DEBUG, format=log_format)
-        debug("Log level set to debug")
-    else:
-        logConfig(level=WARNING, format=log_format)
     keyscanner = KeyScanner()
     try:
         info("Running Scanner")

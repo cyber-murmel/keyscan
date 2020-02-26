@@ -10,14 +10,13 @@ from logging import DEBUG, INFO, WARNING, ERROR, CRITICAL
 from .keycodes import KEYCODE_CHAR_MAP
 
 class NoInputDeviceError(Exception):
-    """No input device found. Check permissions and connections"""
     pass
 
 class KeyScanner():
     def __init__(self, callback = lambda buf : print(buf), delimiter='\n'):
         self.devices = [InputDevice(path) for path in list_devices()]
         if not self.devices:
-            raise NoInputDeviceError
+            raise NoInputDeviceError("No input device found. Check permissions and connections")
         else:
             self.callback = callback
             self.delimiter = delimiter
